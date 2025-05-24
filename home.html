@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dummy Page</title>
+  <style>
+    body { font-family: sans-serif; line-height: 1.6; margin: 0; padding: 0; }
+    header, footer { background: #f4f4f4; padding: 1rem; text-align: center; }
+    nav a { margin: 0 0.5rem; color: #333; text-decoration: none; }
+    main { padding: 1rem; }
+    section { margin-bottom: 2rem; }
+    .gallery img { width: 150px; height: 150px; margin: 0.5rem; object-fit: cover; }
+    form input, form textarea { display: block; width: 100%; max-width: 300px; margin-bottom: 0.5rem; padding: 0.5rem; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>My Dummy Website</h1>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#features">Features</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="about">
+      <h2>About Us</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vehicula, justo at pulvinar cursus, orci libero aliquet quam, in aliquet sapien turpis a mauris.</p>
+    </section>
+
+    <section id="features">
+      <h2>Key Features</h2>
+      <ul>
+        <li>Feature One</li>
+        <li>Feature Two</li>
+        <li>Feature Three</li>
+      </ul>
+    </section>
+
+    <section id="gallery" class="gallery">
+      <h2>Gallery</h2>
+      <img src="https://via.placeholder.com/150" alt="Placeholder image 1"/>
+      <img src="https://via.placeholder.com/150" alt="Placeholder image 2"/>
+      <img src="https://via.placeholder.com/150" alt="Placeholder image 3"/>
+    </section>
+
+    <section id="contact">
+      <h2>Contact Us</h2>
+      <form action="#" method="post">
+        <input type="text" name="name" placeholder="Your Name"/>
+        <input type="email" name="email" placeholder="Your Email"/>
+        <textarea name="message" rows="4" placeholder="Your Message"></textarea>
+        <button type="submit">Send</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Dummy Company. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>

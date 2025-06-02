@@ -497,10 +497,6 @@
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
         }
 
-        .project-card.disabled {
-            opacity: 0.6;
-        }
-
         .project-title {
             font-size: 1.25rem;
             font-weight: 600;
@@ -535,11 +531,6 @@
             transform: translateY(-2px);
         }
 
-        .tech-tag.disabled {
-            background-color: rgba(163, 163, 163, 0.2);
-            color: var(--text-muted);
-        }
-
         .project-link {
             display: inline-flex;
             align-items: center;
@@ -552,11 +543,6 @@
 
         .project-link:hover {
             color: var(--cblue-200);
-        }
-
-        .project-link.disabled {
-            color: var(--text-muted);
-            cursor: not-allowed;
         }
 
         /* Contact Section */
@@ -923,18 +909,22 @@
                         Personal
                     </h3>
                     <div class="project-grid">
-                        <div class="project-card disabled">
-                            <h4 class="project-title">Coming Soon</h4>
+                        <div class="project-card">
+                            <h4 class="project-title">Ailerts Automation</h4>
                             <p class="project-description">
-                                Exciting personal projects are currently in development. Stay tuned for upcoming releases that will showcase innovative solutions and creative implementations.
+                                An intelligent video processing and automation system featuring advanced content analysis, automated clipping, and workflow optimization. The system uses AI-driven scene detection, audio analysis, and motion tracking to automatically generate optimized video content for social media platforms.
                             </p>
                             <div class="tech-stack">
-                                <span class="tech-tag disabled">In Development</span>
-                                <span class="tech-tag disabled">Stay Tuned</span>
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">FFmpeg</span>
+                                <span class="tech-tag">AI/ML</span>
+                                <span class="tech-tag">Video Processing</span>
+                                <span class="tech-tag">Automation</span>
+                                <span class="tech-tag">GitHub Actions</span>
                             </div>
-                            <div class="project-link disabled">
-                                Coming Soon <i class="fas fa-clock"></i>
-                            </div>
+                            <a href="ailerts-automation.html" target="_blank" rel="noopener noreferrer" class="project-link">
+                                Explore Project <i class="fas fa-external-link-alt"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -1133,7 +1123,7 @@
             });
 
             // Enhanced hover effects for project cards
-            const projectCards = document.querySelectorAll('.project-card:not(.disabled)');
+            const projectCards = document.querySelectorAll('.project-card');
             projectCards.forEach(card => {
                 card.addEventListener('mouseenter', function() {
                     this.style.transform = 'translateY(-8px) scale(1.02)';
@@ -1179,39 +1169,6 @@
 
             mediaQuery.addEventListener('change', handleMediaChange);
             handleMediaChange(mediaQuery);
-
-            // Lazy loading for images (if any are added later)
-            if ('IntersectionObserver' in window) {
-                const imageObserver = new IntersectionObserver((entries, observer) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            const img = entry.target;
-                            img.src = img.dataset.src;
-                            img.classList.remove('lazy');
-                            imageObserver.unobserve(img);
-                        }
-                    });
-                });
-
-                document.querySelectorAll('img[data-src]').forEach(img => {
-                    imageObserver.observe(img);
-                });
-            }
-
-            // Preload critical resources
-            const criticalResources = [
-                'https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiA.woff2'
-            ];
-
-            criticalResources.forEach(resource => {
-                const link = document.createElement('link');
-                link.rel = 'preload';
-                link.href = resource;
-                link.as = 'font';
-                link.type = 'font/woff2';
-                link.crossOrigin = 'anonymous';
-                document.head.appendChild(link);
-            });
 
             console.log('Portfolio loaded successfully! 🚀');
         });

@@ -3,504 +3,417 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>APT Fitness Assistant | AI-Powered Fitness Companion</title>
-    <meta name="description" content="Advanced Pose Tracking (APT) Fitness Assistant - AI-powered body composition analysis, personalized workout recommendations, and progress tracking using computer vision">
+    <title>APT Fitness Assistant | Alvin</title>
+    <meta name="description" content="AI-powered fitness application with computer vision body composition analysis">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
     <style>
-        /* CSS Variables */
-        :root {
-            /* Colors */
-            --background-primary: #09090B;
-            --background-secondary: #0b0b0b;
-            --background-accent: #0B0A10;
-            --text-primary: #ffffff;
-            --text-secondary: #d4d5d8;
-            --text-accent: #BDD1F6;
-            --text-muted: #a3a3a3;
-            --cblue-200: #B9D2F9;
-            --cblue-400: #88B4F5;
-            --cblue-500: #91B3F0;
-            --neutrals-700: #2a2c30;
-            --neutrals-900: #323232;
-            
-            /* Spacing */
-            --container-padding: 1.5rem;
-            --section-padding: 5rem 0;
-            
-            /* Border Radius */
-            --radius-sm: 0.375rem;
-            --radius-md: 0.5rem;
-            --radius-lg: 0.75rem;
-            --radius-xl: 1rem;
-            --radius-2xl: 1.5rem;
-            
-            /* Shadows */
-            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-        }
-
-        /* Reset and Base Styles */
-        *, *::before, *::after {
-            box-sizing: border-box;
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
 
-        html {
-            font-size: 16px;
-            scroll-behavior: smooth;
+        :root {
+            --bg-primary: #09090B;
+            --bg-secondary: #0b0b0b;
+            --text-primary: #ffffff;
+            --text-secondary: #d4d5d8;
+            --text-muted: #707070;
+            --accent: #88B4F5;
+            --accent-dim: rgba(136, 180, 245, 0.1);
+            --border: rgba(255, 255, 255, 0.08);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         body {
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            line-height: 1.6;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
             color: var(--text-primary);
-            background-color: var(--background-primary);
+            line-height: 1.6;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
         }
 
-        /* Utility Classes */
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding-left: var(--container-padding);
-            padding-right: var(--container-padding);
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 2px;
         }
 
-        .section {
-            padding: var(--section-padding);
-        }
-
-        /* Typography */
-        h1, h2, h3, h4, h5, h6 {
-            font-weight: 700;
-            line-height: 1.2;
-            margin-bottom: 1rem;
-        }
-
-        h1 { font-size: 2.5rem; }
-        h2 { font-size: 2rem; }
-        h3 { font-size: 1.5rem; }
-        h4 { font-size: 1.25rem; }
-
-        .gradient-text {
-            background: linear-gradient(90deg, #a4afc2 -1.49%, #e7effc 19.18%, #bfd4fa 60.52%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        /* Header */
-        .header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 50;
-            backdrop-filter: blur(9px);
-            -webkit-backdrop-filter: blur(9px);
-            background-color: rgba(0, 0, 0, 0.7);
-            border-bottom: 1px solid rgba(50, 50, 50, 0.5);
-            transition: all 0.3s ease;
-        }
-
-        .header .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-top: 1rem;
-            padding-bottom: 1rem;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .logo:hover {
-            color: var(--text-accent);
-            transform: translateY(-2px);
-        }
-
-        .logo-icon {
-            width: 2.5rem;
-            height: 2.5rem;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--cblue-400), var(--cblue-500));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-        }
-
-        .nav {
-            display: none;
-        }
-
-        .nav ul {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .nav-link {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            position: relative;
-            padding: 0.5rem 0;
-        }
-
-        .nav-link::before {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, var(--cblue-400), var(--cblue-500));
-            transition: width 0.3s ease;
-        }
-
-        .nav-link:hover {
-            color: var(--text-accent);
-        }
-
-        .nav-link:hover::before {
-            width: 100%;
-        }
-
-        .nav-toggle {
-            display: block;
-            background: none;
-            border: none;
-            padding: 0.5rem;
-            cursor: pointer;
-        }
-
-        .hamburger {
-            width: 1.5rem;
-            height: 0.125rem;
-            background-color: var(--text-primary);
-            position: relative;
-            transition: all 0.3s ease;
-        }
-
-        .hamburger::before,
-        .hamburger::after {
-            content: '';
-            position: absolute;
-            width: 1.5rem;
-            height: 0.125rem;
-            background-color: var(--text-primary);
-            transition: all 0.3s ease;
-        }
-
-        .hamburger::before {
-            top: -0.5rem;
-        }
-
-        .hamburger::after {
-            top: 0.5rem;
-        }
-
-        .nav-toggle.active .hamburger {
+        ::-webkit-scrollbar-track {
             background: transparent;
         }
 
-        .nav-toggle.active .hamburger::before {
-            transform: rotate(45deg) translate(0.35rem, 0.35rem);
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 2px;
         }
 
-        .nav-toggle.active .hamburger::after {
-            transform: rotate(-45deg) translate(0.35rem, -0.35rem);
-        }
-
-        .mobile-nav {
+        /* Navigation */
+        nav {
             position: fixed;
-            inset: 0;
-            background-color: rgba(0, 0, 0, 0.95);
-            backdrop-filter: blur(9px);
-            -webkit-backdrop-filter: blur(9px);
-            z-index: 40;
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 2rem;
-            transition: all 0.3s ease;
-        }
-
-        .mobile-nav.active {
-            display: flex;
-        }
-
-        .mobile-nav a {
-            font-size: 2rem;
-            color: var(--text-secondary);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .mobile-nav a:hover {
-            color: var(--text-accent);
-        }
-
-        /* Project Hero */
-        .project-hero {
-            min-height: 50vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(to bottom, var(--background-primary), var(--background-secondary));
-            position: relative;
-            overflow: hidden;
-            padding-top: 6rem;
-        }
-
-        .project-hero::before {
-            content: '';
-            position: absolute;
             top: 0;
             left: 0;
             right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at 50% 20%, rgba(136, 180, 245, 0.1) 0%, transparent 50%);
-            pointer-events: none;
+            z-index: 1000;
+            padding: 2rem 4rem;
+            background: rgba(9, 9, 11, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
         }
 
-        .project-hero-content {
-            text-align: center;
-            position: relative;
-            z-index: 10;
-            max-width: 56rem;
+        .nav-container {
+            max-width: 1400px;
             margin: 0 auto;
-        }
-
-        .project-hero h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            animation: fadeIn 0.8s ease-in-out forwards;
-        }
-
-        .project-hero p {
-            font-size: 1.25rem;
-            color: var(--text-secondary);
-            margin-bottom: 2rem;
-            line-height: 1.625;
-            animation: fadeIn 0.8s ease-in-out 0.2s forwards;
-            opacity: 0;
-        }
-
-        .project-links {
             display: flex;
-            gap: 1rem;
-            justify-content: center;
-            animation: fadeIn 0.8s ease-in-out 0.4s forwards;
-            opacity: 0;
-            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        /* Buttons */
-        .btn-primary,
-        .btn-secondary {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 1rem 2rem;
-            border-radius: var(--radius-lg);
-            font-weight: 500;
+        .back-link {
+            color: var(--text-muted);
             text-decoration: none;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--cblue-400), var(--cblue-500));
-            color: white;
-            border: none;
-            box-shadow: var(--shadow-lg);
-        }
-
-        .btn-primary:hover {
-            opacity: 0.8;
-            transform: translateY(-2px) scale(1.05);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--cblue-400);
-            border: 1px solid var(--cblue-400);
-        }
-
-        .btn-secondary:hover {
-            background: var(--cblue-400);
-            color: white;
-            transform: translateY(-2px) scale(1.05);
-        }
-
-        /* Content Sections */
-        .content-section {
-            padding: 5rem 0;
-            background-color: var(--background-primary);
-        }
-
-        .content-section:nth-child(even) {
-            background-color: var(--background-secondary);
-        }
-
-        .feature-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .feature-card {
-            background: linear-gradient(135deg, rgba(11, 10, 16, 0.4), var(--background-primary));
-            border-radius: var(--radius-2xl);
-            padding: 2rem;
-            border: 1px solid var(--neutrals-900);
-            transition: all 0.3s ease;
-        }
-
-        .feature-card:hover {
-            border-color: rgba(136, 180, 245, 0.5);
-            transform: translateY(-4px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        .feature-card h3 {
-            color: var(--cblue-400);
-            margin-bottom: 1rem;
+            font-size: 0.875rem;
             display: flex;
             align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition);
+        }
+
+        .back-link:hover {
+            color: var(--text-primary);
             gap: 0.75rem;
         }
 
-        .feature-card h3 i {
-            font-size: 1.5rem;
+        .github-link {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 0.875rem;
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border);
+            transition: var(--transition);
         }
 
-        .feature-list {
-            list-style: none;
-            margin-top: 1rem;
+        .github-link:hover {
+            border-color: var(--accent);
+            color: var(--accent);
         }
 
-        .feature-list li {
-            padding: 0.5rem 0;
+        /* Hero Section */
+        .hero {
+            padding: 10rem 4rem 4rem;
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .project-label {
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 1rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .project-title {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 300;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.1s forwards;
+        }
+
+        .project-description {
+            font-size: 1.125rem;
+            line-height: 1.6;
             color: var(--text-secondary);
-            position: relative;
-            padding-left: 1.5rem;
+            max-width: 800px;
+            margin-bottom: 3rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.2s forwards;
         }
 
-        .feature-list li::before {
-            content: '→';
-            position: absolute;
-            left: 0;
-            color: var(--cblue-400);
+        .project-meta {
+            display: flex;
+            gap: 3rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.3s forwards;
+        }
+
+        .meta-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .meta-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .meta-value {
+            font-size: 0.875rem;
+            color: var(--text-primary);
+        }
+
+        /* Content Sections */
+        .section {
+            padding: 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 300;
+            margin-bottom: 3rem;
+            letter-spacing: -0.02em;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+            margin-bottom: 6rem;
+        }
+
+        .content-label {
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        .content-text {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .content-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        /* Features Grid */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+
+        .feature {
+            padding: 2rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            transition: var(--transition);
+        }
+
+        .feature:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .feature-number {
+            font-size: 0.75rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .feature-title {
+            font-size: 1.125rem;
+            margin-bottom: 0.75rem;
+            font-weight: 400;
+        }
+
+        .feature-description {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Tech Stack */
+        .tech-stack {
+            background: var(--bg-secondary);
+            padding: 4rem;
+            margin: 4rem 0;
         }
 
         .tech-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
         }
 
         .tech-item {
-            background: rgba(136, 180, 245, 0.1);
-            border: 1px solid rgba(136, 180, 245, 0.3);
-            padding: 1.5rem;
-            border-radius: var(--radius-lg);
             text-align: center;
-            transition: all 0.3s ease;
+            padding: 1.5rem;
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            transition: var(--transition);
         }
 
         .tech-item:hover {
-            background: rgba(136, 180, 245, 0.2);
-            transform: translateY(-2px);
+            border-color: var(--accent);
         }
 
-        .tech-item i {
-            font-size: 2rem;
-            color: var(--cblue-400);
-            margin-bottom: 0.5rem;
-        }
-
-        .tech-item h4 {
-            font-size: 1rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .tech-item p {
+        .tech-name {
             font-size: 0.875rem;
-            color: var(--text-secondary);
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
         }
 
-        /* Code Block */
+        .tech-type {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* Implementation Details */
+        .implementation {
+            background: var(--bg-secondary);
+            padding: 3rem;
+            margin: 4rem 0;
+            border-left: 2px solid var(--accent);
+        }
+
+        .implementation h3 {
+            font-size: 1.25rem;
+            font-weight: 400;
+            margin-bottom: 1.5rem;
+        }
+
+        .implementation p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
         .code-block {
-            background: rgba(0, 0, 0, 0.5);
-            border: 1px solid var(--neutrals-900);
-            border-radius: var(--radius-lg);
+            background: var(--bg-primary);
             padding: 1.5rem;
             margin: 2rem 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.875rem;
+            color: var(--accent);
             overflow-x: auto;
         }
 
-        .code-block pre {
-            color: var(--text-secondary);
-            font-family: 'Consolas', 'Monaco', monospace;
-            font-size: 0.875rem;
-            line-height: 1.5;
-            margin: 0;
+        /* Stats */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin: 4rem 0;
+            padding: 3rem;
+            background: var(--bg-secondary);
         }
 
-        .code-block code {
-            color: var(--cblue-400);
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
         }
 
         /* CTA Section */
-        .cta-section {
-            background: linear-gradient(135deg, var(--background-accent), var(--background-secondary));
-            padding: 4rem 0;
+        .cta {
             text-align: center;
-            border-top: 1px solid var(--neutrals-900);
+            padding: 6rem 4rem;
+            background: var(--bg-secondary);
+        }
+
+        .cta-title {
+            font-size: 2rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+        }
+
+        .cta-description {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 0.875rem 2rem;
+            font-size: 0.875rem;
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--text-primary);
+            color: var(--bg-primary);
+            border: 1px solid var(--text-primary);
+        }
+
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--text-primary);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--text-primary);
         }
 
         /* Footer */
-        .footer {
-            background-color: var(--background-primary);
-            border-top: 1px solid var(--neutrals-900);
-            padding: 2rem 0;
+        footer {
+            padding: 2rem 4rem;
+            border-top: 1px solid var(--border);
             text-align: center;
         }
 
-        .footer p {
-            color: var(--text-secondary);
+        .footer-text {
+            font-size: 0.75rem;
+            color: var(--text-muted);
         }
 
         /* Animations */
-        @keyframes fadeIn {
+        @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(20px);
             }
             to {
                 opacity: 1;
@@ -508,464 +421,298 @@
             }
         }
 
-        /* Scrollbar Styling */
-        ::-webkit-scrollbar {
-            width: 6px;
+        /* Fade in on scroll */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
         }
 
-        ::-webkit-scrollbar-track {
-            background: var(--background-primary);
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
-        ::-webkit-scrollbar-thumb {
-            background: var(--cblue-400);
-            border-radius: 3px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--cblue-500);
-        }
-
-        /* Responsive Design */
-        @media (min-width: 768px) {
-            .nav {
-                display: block;
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            nav {
+                padding: 1.5rem 2rem;
             }
 
-            .nav-toggle {
-                display: none;
+            .hero {
+                padding: 8rem 2rem 2rem;
             }
 
-            .project-hero h1 {
-                font-size: 3.75rem;
+            .section {
+                padding: 3rem 2rem;
             }
 
-            .feature-grid {
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .tech-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
-        }
 
-        @media (min-width: 1024px) {
-            h1 { font-size: 3.5rem; }
-            h2 { font-size: 2.5rem; }
-
-            .feature-grid {
-                grid-template-columns: repeat(3, 1fr);
+            .stats {
+                grid-template-columns: 1fr;
+                gap: 2rem;
             }
-        }
 
-        /* Focus states for accessibility */
-        .nav-link:focus,
-        .btn-primary:focus,
-        .btn-secondary:focus {
-            outline: 2px solid var(--cblue-400);
-            outline-offset: 2px;
-        }
+            .cta {
+                padding: 4rem 2rem;
+            }
 
-        /* Reduced motion preferences */
-        @media (prefers-reduced-motion: reduce) {
-            *,
-            *::before,
-            *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
+            .cta-buttons {
+                flex-direction: column;
             }
         }
     </style>
 </head>
-
 <body>
-    <!-- Header with Navigation -->
-    <header class="header">
-        <div class="container">
-            <a href="index.html" class="logo">
-                <div class="logo-icon">
-                    <i class="fas fa-code"></i>
-                </div>
-                <span>Alvin</span>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="back-link">
+                ← Back to Portfolio
             </a>
-            
-            <nav class="nav">
-                <ul>
-                    <li><a href="index.html#about" class="nav-link">About</a></li>
-                    <li><a href="index.html#projects" class="nav-link">Projects</a></li>
-                    <li><a href="index.html#contact" class="nav-link">Contact</a></li>
-                </ul>
-            </nav>
-
-            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
-                <div class="hamburger"></div>
-            </button>
+            <a href="https://github.com/alphareum/apt-proof-of-concept" target="_blank" class="github-link">
+                View on GitHub
+            </a>
         </div>
+    </nav>
 
-        <!-- Mobile Navigation -->
-        <div class="mobile-nav" id="mobile-nav">
-            <a href="index.html#about">About</a>
-            <a href="index.html#projects">Projects</a>
-            <a href="index.html#contact">Contact</a>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <p class="project-label">Personal Project</p>
+            <h1 class="project-title">APT Fitness Assistant</h1>
+            <p class="project-description">
+                Advanced Pose Tracking technology meets AI-powered fitness coaching to create a personal fitness companion with accurate body composition analysis. This comprehensive application combines computer vision, machine learning, and scientific methods to provide personalized fitness guidance.
+            </p>
+            <div class="project-meta">
+                <div class="meta-item">
+                    <span class="meta-label">Type</span>
+                    <span class="meta-value">AI Application</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Stack</span>
+                    <span class="meta-value">Python, MediaPipe, ML</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Status</span>
+                    <span class="meta-value">Active Development</span>
+                </div>
+            </div>
         </div>
-    </header>
+    </section>
 
-    <main>
-        <!-- Project Hero Section -->
-        <section class="project-hero">
-            <div class="container">
-                <div class="project-hero-content">
-                    <h1 class="gradient-text">
-                        APT Fitness Assistant
-                    </h1>
-                    <p>
-                        Advanced Pose Tracking (APT) technology meets AI-powered fitness coaching to create your personal fitness companion with accurate body composition analysis
-                    </p>
-                    <div class="project-links">
-                        <a href="https://github.com/alphareum/apt-proof-of-concept" target="_blank" rel="noopener noreferrer" class="btn-primary">
-                            <i class="fab fa-github" style="margin-right: 0.5rem;"></i>
-                            View on GitHub
-                        </a>
-                        <a href="#features" class="btn-secondary">
-                            <i class="fas fa-info-circle" style="margin-right: 0.5rem;"></i>
-                            Learn More
-                        </a>
-                    </div>
-                </div>
+    <!-- Overview -->
+    <section class="section">
+        <h2 class="section-title">Project Overview</h2>
+        <div class="content-grid fade-in">
+            <div>
+                <p class="content-label">Challenge</p>
             </div>
-        </section>
-
-        <!-- Overview Section -->
-        <section class="content-section">
-            <div class="container">
-                <h2 class="gradient-text" style="text-align: center; margin-bottom: 3rem;">Project Overview</h2>
-                
-                <p style="font-size: 1.125rem; color: var(--text-secondary); text-align: center; max-width: 56rem; margin: 0 auto 3rem;">
-                    APT Fitness Assistant is a comprehensive AI-powered fitness application that combines computer vision, machine learning, and scientific body composition analysis to provide personalized fitness guidance. The system uses advanced pose tracking to analyze body composition from photos and generates customized workout recommendations based on individual goals and capabilities.
+            <div class="content-text">
+                <p>
+                    Traditional fitness applications lack accurate body composition analysis without expensive equipment. Most solutions require DEXA scans or specialized devices, making personalized fitness guidance inaccessible to many users.
                 </p>
-
-                <div class="feature-grid">
-                    <div class="feature-card">
-                        <h3><i class="fas fa-camera"></i> Computer Vision Analysis</h3>
-                        <p>Advanced pose detection using MediaPipe to extract body measurements from photos with sub-pixel accuracy</p>
-                    </div>
-                    <div class="feature-card">
-                        <h3><i class="fas fa-brain"></i> AI-Powered Recommendations</h3>
-                        <p>Machine learning algorithms generate personalized workout plans based on your goals, fitness level, and equipment</p>
-                    </div>
-                    <div class="feature-card">
-                        <h3><i class="fas fa-chart-line"></i> Progress Tracking</h3>
-                        <p>Comprehensive analytics dashboard to monitor your fitness journey with visual progress charts and metrics</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Features Section -->
-        <section id="features" class="content-section">
-            <div class="container">
-                <h2 class="gradient-text" style="text-align: center; margin-bottom: 3rem;">Key Features</h2>
-
-                <div class="feature-grid">
-                    <div class="feature-card">
-                        <h3><i class="fas fa-body-weight"></i> Body Composition Analysis</h3>
-                        <ul class="feature-list">
-                            <li>Navy Method body fat calculation (±3% accuracy)</li>
-                            <li>Enhanced muscle mass estimation</li>
-                            <li>BMR calculation using multiple formulas</li>
-                            <li>Visceral fat level assessment</li>
-                            <li>Body shape classification</li>
-                        </ul>
-                    </div>
-
-                    <div class="feature-card">
-                        <h3><i class="fas fa-dumbbell"></i> Workout Generation</h3>
-                        <ul class="feature-list">
-                            <li>Personalized exercise recommendations</li>
-                            <li>Weekly workout plan generation</li>
-                            <li>Equipment-based filtering</li>
-                            <li>Injury-aware exercise selection</li>
-                            <li>Rest day optimization</li>
-                        </ul>
-                    </div>
-
-                    <div class="feature-card">
-                        <h3><i class="fas fa-user-cog"></i> User Experience</h3>
-                        <ul class="feature-list">
-                            <li>Intuitive web interface with Streamlit</li>
-                            <li>Real-time form correction feedback</li>
-                            <li>Exercise timer and tracking</li>
-                            <li>Goal setting and monitoring</li>
-                            <li>Multi-view image analysis support</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Technical Stack Section -->
-        <section class="content-section">
-            <div class="container">
-                <h2 class="gradient-text" style="text-align: center; margin-bottom: 3rem;">Technical Stack</h2>
-
-                <div class="tech-grid">
-                    <div class="tech-item">
-                        <i class="fab fa-python"></i>
-                        <h4>Python</h4>
-                        <p>Core programming language for backend logic and ML</p>
-                    </div>
-                    <div class="tech-item">
-                        <i class="fas fa-video"></i>
-                        <h4>MediaPipe</h4>
-                        <p>Google's pose detection for body landmark tracking</p>
-                    </div>
-                    <div class="tech-item">
-                        <i class="fas fa-robot"></i>
-                        <h4>Machine Learning</h4>
-                        <p>Ensemble models for body composition estimation</p>
-                    </div>
-                    <div class="tech-item">
-                        <i class="fas fa-stream"></i>
-                        <h4>Streamlit</h4>
-                        <p>Modern web framework for interactive UI</p>
-                    </div>
-                    <div class="tech-item">
-                        <i class="fas fa-eye"></i>
-                        <h4>OpenCV</h4>
-                        <p>Computer vision for image processing</p>
-                    </div>
-                    <div class="tech-item">
-                        <i class="fas fa-database"></i>
-                        <h4>SQLite</h4>
-                        <p>Lightweight database for user data storage</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Implementation Section -->
-        <section class="content-section">
-            <div class="container">
-                <h2 class="gradient-text" style="text-align: center; margin-bottom: 3rem;">Implementation Highlights</h2>
-
-                <h3 style="color: var(--cblue-400); margin-bottom: 1.5rem;">Enhanced Computer Vision Pipeline</h3>
-                <p style="color: var(--text-secondary); margin-bottom: 1rem;">
-                    The system uses a multi-stage image processing pipeline with adaptive enhancement based on image quality assessment. This includes:
+                <p>
+                    The challenge was to create an accessible, accurate system that could analyze body composition from simple photos while providing actionable fitness recommendations based on individual goals and capabilities.
                 </p>
-                <ul class="feature-list" style="margin-bottom: 2rem;">
-                    <li>Multi-model pose detection with intelligent fallback</li>
-                    <li>Sub-pixel accuracy for landmark positioning</li>
-                    <li>Perspective and lens distortion correction</li>
-                    <li>Confidence-weighted measurement extraction</li>
-                </ul>
-
-                <h3 style="color: var(--cblue-400); margin-bottom: 1.5rem;">Scientific Body Composition Methods</h3>
-                <p style="color: var(--text-secondary); margin-bottom: 1rem;">
-                    Multiple validated formulas are combined with dynamic weighting based on individual characteristics:
+            </div>
+        </div>
+        <div class="content-grid fade-in">
+            <div>
+                <p class="content-label">Solution</p>
+            </div>
+            <div class="content-text">
+                <p>
+                    APT Fitness Assistant leverages advanced computer vision and machine learning to extract body measurements from photos with sub-pixel accuracy. The system uses MediaPipe for pose detection and implements the Navy Method for body composition calculation.
                 </p>
-                <div class="code-block">
-                    <pre><code># Navy Method Body Fat Formula (±3-4% accuracy)
+                <p>
+                    By combining multiple validated formulas with ensemble ML models, the application achieves ±3-5% accuracy for body fat calculation and ±5-8% for muscle mass estimation - a 60-80% improvement over traditional methods.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Features -->
+    <section class="section">
+        <h2 class="section-title">Key Features</h2>
+        <div class="features fade-in">
+            <div class="feature">
+                <p class="feature-number">01</p>
+                <h3 class="feature-title">Body Composition Analysis</h3>
+                <p class="feature-description">
+                    Navy Method body fat calculation with ±3% accuracy, enhanced muscle mass estimation, and comprehensive BMR calculation using multiple formulas.
+                </p>
+            </div>
+            <div class="feature">
+                <p class="feature-number">02</p>
+                <h3 class="feature-title">AI Workout Generation</h3>
+                <p class="feature-description">
+                    Personalized exercise recommendations based on goals, fitness level, and available equipment with injury-aware exercise selection.
+                </p>
+            </div>
+            <div class="feature">
+                <p class="feature-number">03</p>
+                <h3 class="feature-title">Progress Tracking</h3>
+                <p class="feature-description">
+                    Comprehensive analytics dashboard to monitor fitness journey with visual progress charts, metrics, and goal achievement tracking.
+                </p>
+            </div>
+            <div class="feature">
+                <p class="feature-number">04</p>
+                <h3 class="feature-title">Computer Vision Analysis</h3>
+                <p class="feature-description">
+                    Advanced pose detection using MediaPipe to extract body measurements from photos with sub-pixel accuracy and multi-view support.
+                </p>
+            </div>
+            <div class="feature">
+                <p class="feature-number">05</p>
+                <h3 class="feature-title">Real-time Feedback</h3>
+                <p class="feature-description">
+                    Instant form correction during exercises with timer tracking and performance metrics for optimal workout execution.
+                </p>
+            </div>
+            <div class="feature">
+                <p class="feature-number">06</p>
+                <h3 class="feature-title">Scientific Methods</h3>
+                <p class="feature-description">
+                    Validated formulas combined with dynamic weighting based on individual characteristics for maximum accuracy.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Stack -->
+    <section class="tech-stack">
+        <div style="max-width: 1400px; margin: 0 auto;">
+            <h2 class="section-title">Technical Stack</h2>
+            <div class="tech-grid fade-in">
+                <div class="tech-item">
+                    <p class="tech-name">Python</p>
+                    <p class="tech-type">Core Language</p>
+                </div>
+                <div class="tech-item">
+                    <p class="tech-name">MediaPipe</p>
+                    <p class="tech-type">Pose Detection</p>
+                </div>
+                <div class="tech-item">
+                    <p class="tech-name">Streamlit</p>
+                    <p class="tech-type">Web Framework</p>
+                </div>
+                <div class="tech-item">
+                    <p class="tech-name">OpenCV</p>
+                    <p class="tech-type">Image Processing</p>
+                </div>
+                <div class="tech-item">
+                    <p class="tech-name">Scikit-learn</p>
+                    <p class="tech-type">Machine Learning</p>
+                </div>
+                <div class="tech-item">
+                    <p class="tech-name">NumPy</p>
+                    <p class="tech-type">Calculations</p>
+                </div>
+                <div class="tech-item">
+                    <p class="tech-name">SQLite</p>
+                    <p class="tech-type">Database</p>
+                </div>
+                <div class="tech-item">
+                    <p class="tech-name">Matplotlib</p>
+                    <p class="tech-type">Visualizations</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Implementation -->
+    <section class="section">
+        <div class="implementation fade-in">
+            <h3>Enhanced Computer Vision Pipeline</h3>
+            <p>
+                The system uses a multi-stage image processing pipeline with adaptive enhancement based on image quality assessment. This includes multi-model pose detection with intelligent fallback, sub-pixel accuracy for landmark positioning, and perspective correction for accurate measurements.
+            </p>
+            <div class="code-block">
+# Navy Method Body Fat Formula (±3-4% accuracy)
 if gender == 'male':
     body_fat = 495 / (1.0324 - 0.19077 * log10(waist - neck) + 
                      0.15456 * log10(height)) - 450
 else:
     body_fat = 495 / (1.29579 - 0.35004 * log10(waist + hip - neck) + 
-                     0.22100 * log10(height)) - 450</code></pre>
-                </div>
-
-                <h3 style="color: var(--cblue-400); margin-bottom: 1.5rem;">Machine Learning Integration</h3>
-                <p style="color: var(--text-secondary); margin-bottom: 1rem;">
-                    An ensemble of ML models provides enhanced accuracy for body composition estimation:
-                </p>
-                <ul class="feature-list">
-                    <li>Random Forest, Gradient Boosting, and Ridge Regression models</li>
-                    <li>13 anthropometric features for comprehensive analysis</li>
-                    <li>5000+ synthetic training samples with realistic correlations</li>
-                    <li>Robust scaling for outlier handling</li>
-                </ul>
+                     0.22100 * log10(height)) - 450
             </div>
-        </section>
-
-        <!-- Results Section -->
-        <section class="content-section">
-            <div class="container">
-                <h2 class="gradient-text" style="text-align: center; margin-bottom: 3rem;">Accuracy Improvements</h2>
-
-                <div style="background: rgba(136, 180, 245, 0.1); border: 1px solid rgba(136, 180, 245, 0.3); padding: 2rem; border-radius: var(--radius-lg); margin-bottom: 2rem;">
-                    <h3 style="color: var(--cblue-400); margin-bottom: 1rem;">Body Fat Calculation</h3>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
-                        <div>
-                            <p style="color: var(--text-muted);">Previous Accuracy</p>
-                            <p style="font-size: 1.5rem; font-weight: 600;">±8-15% error</p>
-                        </div>
-                        <div>
-                            <p style="color: var(--text-muted);">New Accuracy</p>
-                            <p style="font-size: 1.5rem; font-weight: 600; color: var(--cblue-400);">±3-5% error</p>
-                        </div>
-                        <div>
-                            <p style="color: var(--text-muted);">Improvement</p>
-                            <p style="font-size: 1.5rem; font-weight: 600; color: #4ade80;">60-80% better</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div style="background: rgba(136, 180, 245, 0.1); border: 1px solid rgba(136, 180, 245, 0.3); padding: 2rem; border-radius: var(--radius-lg);">
-                    <h3 style="color: var(--cblue-400); margin-bottom: 1rem;">Muscle Mass Calculation</h3>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
-                        <div>
-                            <p style="color: var(--text-muted);">Previous Accuracy</p>
-                            <p style="font-size: 1.5rem; font-weight: 600;">±12-20% error</p>
-                        </div>
-                        <div>
-                            <p style="color: var(--text-muted);">New Accuracy</p>
-                            <p style="font-size: 1.5rem; font-weight: 600; color: var(--cblue-400);">±5-8% error</p>
-                        </div>
-                        <div>
-                            <p style="color: var(--text-muted);">Improvement</p>
-                            <p style="font-size: 1.5rem; font-weight: 600; color: #4ade80;">70% better</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Future Development Section -->
-        <section class="content-section">
-            <div class="container">
-                <h2 class="gradient-text" style="text-align: center; margin-bottom: 3rem;">Future Development</h2>
-
-                <div class="feature-grid">
-                    <div class="feature-card">
-                        <h3><i class="fas fa-mobile-alt"></i> Mobile Application</h3>
-                        <p>Native mobile apps for iOS and Android with offline capabilities and real-time camera analysis</p>
-                    </div>
-                    <div class="feature-card">
-                        <h3><i class="fas fa-apple-alt"></i> Nutrition Tracking</h3>
-                        <p>Integrated meal planning and calorie tracking with barcode scanning and recipe suggestions</p>
-                    </div>
-                    <div class="feature-card">
-                        <h3><i class="fas fa-users"></i> Social Features</h3>
-                        <p>Community challenges, workout sharing, and social accountability features</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- CTA Section -->
-        <section class="cta-section">
-            <div class="container">
-                <h2 style="margin-bottom: 1.5rem;">Explore the Project</h2>
-                <p style="color: var(--text-secondary); margin-bottom: 2rem; max-width: 42rem; margin-left: auto; margin-right: auto;">
-                    APT Fitness Assistant is open source and actively being developed. Check out the repository for documentation, setup instructions, and contribution guidelines.
-                </p>
-                <div class="project-links">
-                    <a href="https://github.com/alphareum/apt-proof-of-concept" target="_blank" rel="noopener noreferrer" class="btn-primary">
-                        <i class="fab fa-github" style="margin-right: 0.5rem;"></i>
-                        View Repository
-                    </a>
-                    <a href="index.html#projects" class="btn-secondary">
-                        <i class="fas fa-arrow-left" style="margin-right: 0.5rem;"></i>
-                        Back to Projects
-                    </a>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
             <p>
-                &copy; 2025 Alvin. All Rights Reserved.
+                An ensemble of Random Forest, Gradient Boosting, and Ridge Regression models provides enhanced accuracy for body composition estimation, trained on 5000+ synthetic samples with realistic correlations.
             </p>
         </div>
+    </section>
+
+    <!-- Results -->
+    <section class="section">
+        <h2 class="section-title">Accuracy Improvements</h2>
+        <div class="stats fade-in">
+            <div class="stat">
+                <p class="stat-value">±3-5%</p>
+                <p class="stat-label">Body Fat Accuracy</p>
+            </div>
+            <div class="stat">
+                <p class="stat-value">70%</p>
+                <p class="stat-label">Improvement Rate</p>
+            </div>
+            <div class="stat">
+                <p class="stat-value">±5-8%</p>
+                <p class="stat-label">Muscle Mass Accuracy</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <h2 class="cta-title">Explore the Project</h2>
+        <p class="cta-description">
+            APT Fitness Assistant is open source and actively being developed. Check out the repository for documentation, setup instructions, and contribution guidelines.
+        </p>
+        <div class="cta-buttons">
+            <a href="https://github.com/alphareum/apt-proof-of-concept" target="_blank" class="btn btn-primary">
+                View Repository →
+            </a>
+            <a href="index.html#projects" class="btn btn-secondary">
+                Back to Projects
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p class="footer-text">© 2025 Alvin. All rights reserved.</p>
     </footer>
 
     <script>
-        // JavaScript functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            // Mobile Navigation Toggle
-            const navToggle = document.getElementById('nav-toggle');
-            const mobileNav = document.getElementById('mobile-nav');
-            
-            if (navToggle && mobileNav) {
-                navToggle.addEventListener('click', function() {
-                    navToggle.classList.toggle('active');
-                    mobileNav.classList.toggle('active');
-                    
-                    // Prevent body scroll when menu is open
-                    if (mobileNav.classList.contains('active')) {
-                        document.body.style.overflow = 'hidden';
-                    } else {
-                        document.body.style.overflow = '';
-                    }
-                });
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
 
-                // Close mobile nav when clicking on links
-                const mobileNavLinks = mobileNav.querySelectorAll('a');
-                mobileNavLinks.forEach(link => {
-                    link.addEventListener('click', function() {
-                        navToggle.classList.remove('active');
-                        mobileNav.classList.remove('active');
-                        document.body.style.overflow = '';
-                    });
-                });
-
-                // Close mobile nav when clicking outside
-                mobileNav.addEventListener('click', function(e) {
-                    if (e.target === mobileNav) {
-                        navToggle.classList.remove('active');
-                        mobileNav.classList.remove('active');
-                        document.body.style.overflow = '';
-                    }
-                });
-            }
-
-            // Smooth scrolling for navigation links
-            const navLinks = document.querySelectorAll('a[href^="#"]');
-            navLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('href');
-                    const targetSection = document.querySelector(targetId);
-                    
-                    if (targetSection) {
-                        const headerHeight = document.querySelector('.header').offsetHeight;
-                        const targetPosition = targetSection.offsetTop - headerHeight - 20;
-                        
-                        window.scrollTo({
-                            top: targetPosition,
-                            behavior: 'smooth'
-                        });
-                    }
-                });
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
             });
+        }, observerOptions);
 
-            // Header background on scroll
-            const header = document.querySelector('.header');
-            let ticking = false;
-
-            function updateHeader() {
-                const scrollY = window.scrollY;
-                
-                if (scrollY > 50) {
-                    header.style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
-                    header.style.backdropFilter = 'blur(12px)';
-                } else {
-                    header.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
-                    header.style.backdropFilter = 'blur(9px)';
-                }
-                
-                ticking = false;
-            }
-
-            function requestTick() {
-                if (!ticking) {
-                    requestAnimationFrame(updateHeader);
-                    ticking = true;
-                }
-            }
-
-            window.addEventListener('scroll', requestTick, { passive: true });
-
-            console.log('APT Fitness Assistant project page loaded successfully! 🏋️‍♀️');
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
         });
     </script>
 </body>

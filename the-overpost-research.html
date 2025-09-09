@@ -3,562 +3,458 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Overpost Research | Financial Market Analysis & Content Strategy</title>
-    <meta name="description" content="Research and scriptwriting work at The Overpost - Financial market analysis, business research, and content strategy for Indonesia's leading financial education YouTube channel">
+    <title>The Overpost Research | Alvin</title>
+    <meta name="description" content="Financial market analysis and content strategy for Indonesia's leading financial education YouTube channel">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
     <style>
-        /* CSS Variables */
-        :root {
-            --background-primary: #09090B;
-            --background-secondary: #0b0b0b;
-            --background-accent: #0B0A10;
-            --text-primary: #ffffff;
-            --text-secondary: #d4d5d8;
-            --text-accent: #BDD1F6;
-            --text-muted: #a3a3a3;
-            --cblue-200: #B9D2F9;
-            --cblue-400: #88B4F5;
-            --cblue-500: #91B3F0;
-            --accent-green: #10B981;
-            --accent-orange: #F59E0B;
-            --accent-purple: #8B5CF6;
-            --neutrals-700: #2a2c30;
-            --neutrals-900: #323232;
-            
-            --container-padding: 1.5rem;
-            --section-padding: 4rem 0;
-            --radius-sm: 0.375rem;
-            --radius-md: 0.5rem;
-            --radius-lg: 0.75rem;
-            --radius-xl: 1rem;
-            --radius-2xl: 1.5rem;
-            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 10px 10px -5px rgb(0 0 0 / 0.04);
-        }
-
-        /* Reset and Base Styles */
-        *, *::before, *::after {
-            box-sizing: border-box;
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
 
-        html {
-            font-size: 16px;
-            scroll-behavior: smooth;
+        :root {
+            --bg-primary: #09090B;
+            --bg-secondary: #0b0b0b;
+            --text-primary: #ffffff;
+            --text-secondary: #d4d5d8;
+            --text-muted: #707070;
+            --accent: #88B4F5;
+            --accent-red: #ff4444;
+            --accent-dim: rgba(136, 180, 245, 0.1);
+            --border: rgba(255, 255, 255, 0.08);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         body {
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            line-height: 1.6;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
             color: var(--text-primary);
-            background-color: var(--background-primary);
+            line-height: 1.6;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
         }
 
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding-left: var(--container-padding);
-            padding-right: var(--container-padding);
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 2px;
         }
 
-        .section {
-            padding: var(--section-padding);
+        ::-webkit-scrollbar-track {
+            background: transparent;
         }
 
-        /* Typography */
-        h1, h2, h3, h4, h5, h6 {
-            font-weight: 700;
-            line-height: 1.2;
-            margin-bottom: 1rem;
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 2px;
         }
 
-        h1 { font-size: 3rem; }
-        h2 { font-size: 2.25rem; }
-        h3 { font-size: 1.75rem; }
-        h4 { font-size: 1.25rem; }
-
-        .gradient-text {
-            background: linear-gradient(90deg, #a4afc2 -1.49%, #e7effc 19.18%, #bfd4fa 60.52%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .accent-text {
-            color: var(--cblue-400);
-        }
-
-        /* Header */
-        .header {
+        /* Navigation */
+        nav {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            z-index: 50;
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            background-color: rgba(0, 0, 0, 0.8);
-            border-bottom: 1px solid rgba(50, 50, 50, 0.5);
-            transition: all 0.3s ease;
+            right: 0;
+            z-index: 1000;
+            padding: 2rem 4rem;
+            background: rgba(9, 9, 11, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
         }
 
-        .header .container {
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding-top: 1rem;
-            padding-bottom: 1rem;
         }
 
-        .logo {
+        .back-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.875rem;
             display: flex;
             align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition);
+        }
+
+        .back-link:hover {
+            color: var(--text-primary);
             gap: 0.75rem;
-            font-size: 1.25rem;
-            font-weight: 700;
+        }
+
+        .youtube-link {
             color: var(--text-primary);
             text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .logo:hover {
-            color: var(--text-accent);
-            transform: translateY(-2px);
-        }
-
-        .back-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
+            font-size: 0.875rem;
             padding: 0.5rem 1rem;
-            background: rgba(136, 180, 245, 0.1);
-            border: 1px solid var(--cblue-400);
-            border-radius: var(--radius-lg);
-            color: var(--cblue-400);
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
+            border: 1px solid var(--accent-red);
+            color: var(--accent-red);
+            transition: var(--transition);
         }
 
-        .back-button:hover {
-            background: var(--cblue-400);
+        .youtube-link:hover {
+            background: var(--accent-red);
             color: white;
-            transform: translateY(-2px);
         }
 
         /* Hero Section */
         .hero {
-            padding: 8rem 0 4rem;
-            background: linear-gradient(135deg, var(--background-primary) 0%, var(--background-secondary) 50%, var(--background-accent) 100%);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at 30% 20%, rgba(136, 180, 245, 0.15) 0%, transparent 50%),
-                        radial-gradient(circle at 70% 80%, rgba(16, 185, 129, 0.1) 0%, transparent 50%);
-            pointer-events: none;
+            padding: 10rem 4rem 4rem;
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
         }
 
         .hero-content {
-            position: relative;
-            z-index: 10;
-            text-align: center;
-            max-width: 800px;
+            max-width: 1400px;
             margin: 0 auto;
+            width: 100%;
         }
 
-        .hero-title {
-            font-size: 3.5rem;
-            margin-bottom: 1.5rem;
+        .project-label {
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--accent-red);
+            margin-bottom: 1rem;
+            opacity: 0;
             animation: fadeInUp 0.8s ease forwards;
         }
 
-        .hero-subtitle {
-            font-size: 1.25rem;
-            color: var(--text-secondary);
+        .project-title {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 300;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
             margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.1s forwards;
+        }
+
+        .project-description {
+            font-size: 1.125rem;
+            line-height: 1.6;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin-bottom: 3rem;
+            opacity: 0;
             animation: fadeInUp 0.8s ease 0.2s forwards;
-            opacity: 0;
         }
 
-        .hero-badges {
+        .project-meta {
             display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            justify-content: center;
-            margin-bottom: 2rem;
-            animation: fadeInUp 0.8s ease 0.4s forwards;
+            gap: 3rem;
             opacity: 0;
+            animation: fadeInUp 0.8s ease 0.3s forwards;
         }
 
-        .badge {
-            padding: 0.5rem 1rem;
-            background: linear-gradient(135deg, rgba(136, 180, 245, 0.2), rgba(16, 185, 129, 0.2));
-            border: 1px solid rgba(136, 180, 245, 0.3);
-            border-radius: 9999px;
+        .meta-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .meta-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .meta-value {
             font-size: 0.875rem;
-            font-weight: 500;
-            color: var(--text-accent);
-            backdrop-filter: blur(10px);
-        }
-
-        /* Action Buttons */
-        .action-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            animation: fadeInUp 0.8s ease 0.6s forwards;
-            opacity: 0;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 1rem 2rem;
-            border-radius: var(--radius-lg);
-            font-weight: 500;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--cblue-400), var(--cblue-500));
-            color: white;
-            box-shadow: var(--shadow-lg);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--text-secondary);
-            border: 1px solid var(--neutrals-700);
-        }
-
-        .btn:hover {
-            transform: translateY(-2px) scale(1.05);
-        }
-
-        .btn-primary:hover {
-            box-shadow: var(--shadow-xl);
-        }
-
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.1);
             color: var(--text-primary);
         }
 
         /* Content Sections */
-        .content-section {
-            padding: 4rem 0;
-            position: relative;
-        }
-
-        .content-section:nth-child(even) {
-            background: var(--background-secondary);
+        .section {
+            padding: 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
         }
 
         .section-title {
-            font-size: 2.5rem;
-            text-align: center;
+            font-size: 2rem;
+            font-weight: 300;
             margin-bottom: 3rem;
-            position: relative;
+            letter-spacing: -0.02em;
         }
 
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 3px;
-            background: linear-gradient(90deg, var(--cblue-400), var(--accent-green));
-            border-radius: 2px;
-        }
-
-        /* Features Grid */
-        .features-grid {
+        .content-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+            margin-bottom: 6rem;
         }
 
-        .feature-card {
-            background: linear-gradient(135deg, rgba(11, 10, 16, 0.6), rgba(0, 0, 0, 0.4));
-            border: 1px solid var(--neutrals-900);
-            border-radius: var(--radius-2xl);
-            padding: 2rem;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
+        .content-label {
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-muted);
         }
 
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--cblue-400), var(--accent-green), var(--accent-purple));
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
+        .content-text {
+            color: var(--text-secondary);
+            line-height: 1.8;
         }
 
-        .feature-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .feature-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            border-color: rgba(136, 180, 245, 0.3);
-        }
-
-        .feature-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
+        .content-text p {
             margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, var(--cblue-400), var(--cblue-500));
-            color: white;
         }
 
-        .feature-title {
-            font-size: 1.25rem;
+        /* Responsibilities Grid */
+        .responsibilities {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+
+        .responsibility {
+            padding: 2rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            transition: var(--transition);
+        }
+
+        .responsibility:hover {
+            border-color: var(--accent-red);
+            transform: translateY(-2px);
+        }
+
+        .responsibility-number {
+            font-size: 0.75rem;
+            color: var(--accent-red);
             margin-bottom: 1rem;
-            color: var(--text-primary);
+            font-family: 'JetBrains Mono', monospace;
         }
 
-        .feature-description {
+        .responsibility-title {
+            font-size: 1.125rem;
+            margin-bottom: 0.75rem;
+            font-weight: 400;
+        }
+
+        .responsibility-description {
+            font-size: 0.875rem;
             color: var(--text-secondary);
             line-height: 1.6;
         }
 
-        /* Research Types Grid */
-        .research-types {
+        /* Research Methods */
+        .methods-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin: 4rem 0;
         }
 
-        .research-type {
-            background: linear-gradient(135deg, rgba(11, 10, 16, 0.4), rgba(0, 0, 0, 0.2));
-            border: 1px solid var(--neutrals-900);
-            border-radius: var(--radius-xl);
-            padding: 2rem;
-            text-align: center;
-            transition: all 0.3s ease;
+        .method-card {
+            padding: 3rem;
+            background: var(--bg-secondary);
+            border-left: 2px solid var(--accent-red);
         }
 
-        .research-type:hover {
-            transform: translateY(-5px);
-            border-color: rgba(136, 180, 245, 0.3);
-        }
-
-        .research-type-icon {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.25rem;
-            margin: 0 auto 1rem;
-            color: white;
-        }
-
-        .research-type-icon.quantitative { background: linear-gradient(135deg, var(--accent-green), var(--cblue-400)); }
-        .research-type-icon.qualitative { background: linear-gradient(135deg, var(--accent-purple), var(--cblue-500)); }
-
-        .research-type-title {
-            font-size: 1.1rem;
+        .method-title {
+            font-size: 1.5rem;
+            font-weight: 300;
             margin-bottom: 1rem;
-            color: var(--text-accent);
         }
 
-        .research-examples {
+        .method-description {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .method-examples {
             display: flex;
             flex-wrap: wrap;
             gap: 0.5rem;
-            justify-content: center;
         }
 
-        .research-example {
-            background: rgba(136, 180, 245, 0.2);
-            color: var(--cblue-400);
+        .example-tag {
             padding: 0.25rem 0.75rem;
-            border-radius: 9999px;
-            font-size: 0.875rem;
-            font-weight: 500;
+            background: rgba(255, 68, 68, 0.1);
+            color: var(--accent-red);
+            font-size: 0.75rem;
+            font-family: 'JetBrains Mono', monospace;
         }
 
-        /* Featured Work Section */
-        .featured-work {
+        /* Featured Work */
+        .work-grid {
             display: grid;
-            grid-template-columns: 1fr;
             gap: 2rem;
-            margin-top: 3rem;
+            margin: 4rem 0;
         }
 
         .work-item {
-            background: linear-gradient(135deg, rgba(11, 10, 16, 0.6), rgba(0, 0, 0, 0.4));
-            border: 1px solid var(--neutrals-900);
-            border-radius: var(--radius-2xl);
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 3rem;
             padding: 2rem;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .work-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, #ff0000, #cc0000);
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-        }
-
-        .work-item:hover::before {
-            transform: scaleX(1);
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            transition: var(--transition);
         }
 
         .work-item:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            border-color: rgba(255, 0, 0, 0.3);
+            border-color: var(--accent-red);
         }
 
-        .work-item-header {
+        .work-meta {
             display: flex;
-            align-items: center;
+            flex-direction: column;
             gap: 1rem;
-            margin-bottom: 1.5rem;
         }
 
-        .work-item-icon {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #ff0000, #cc0000);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
+        .work-type {
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--accent-red);
+        }
+
+        .work-title {
             font-size: 1.25rem;
+            font-weight: 400;
         }
 
-        .work-item-title {
-            font-size: 1.25rem;
-            margin: 0;
-            color: var(--text-primary);
-        }
-
-        .work-item-type {
+        .work-link {
+            color: var(--accent-red);
+            text-decoration: none;
             font-size: 0.875rem;
-            color: var(--text-muted);
-            background: rgba(136, 180, 245, 0.1);
-            padding: 0.25rem 0.75rem;
-            border-radius: 9999px;
-            margin-left: auto;
-        }
-
-        .work-item-description {
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
-        }
-
-        .work-item-link {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            color: #ff0000;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
+            margin-top: auto;
+            transition: var(--transition);
         }
 
-        .work-item-link:hover {
-            color: #cc0000;
-            transform: translateX(5px);
+        .work-link:hover {
+            gap: 1rem;
         }
 
-        /* Stats Section */
-        .stats-grid {
+        .work-description {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        /* Stats */
+        .stats {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(4, 1fr);
             gap: 2rem;
-            margin-top: 3rem;
+            margin: 4rem 0;
+            padding: 3rem;
+            background: var(--bg-secondary);
         }
 
-        .stat-card {
-            background: linear-gradient(135deg, rgba(11, 10, 16, 0.6), rgba(0, 0, 0, 0.4));
-            border: 1px solid var(--neutrals-900);
-            border-radius: var(--radius-xl);
-            padding: 2rem;
+        .stat {
             text-align: center;
-            position: relative;
-            overflow: hidden;
+            border-right: 1px solid var(--border);
         }
 
-        .stat-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, var(--cblue-400), var(--accent-green));
+        .stat:last-child {
+            border-right: none;
         }
 
-        .stat-number {
+        .stat-value {
             font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--cblue-400);
+            font-weight: 300;
+            color: var(--accent-red);
             margin-bottom: 0.5rem;
         }
 
         .stat-label {
+            font-size: 0.875rem;
             color: var(--text-secondary);
-            font-size: 0.95rem;
+        }
+
+        /* CTA Section */
+        .cta {
+            text-align: center;
+            padding: 6rem 4rem;
+            background: var(--bg-secondary);
+        }
+
+        .cta-title {
+            font-size: 2rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+        }
+
+        .cta-description {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 0.875rem 2rem;
+            font-size: 0.875rem;
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--accent-red);
+            color: white;
+            border: 1px solid var(--accent-red);
+        }
+
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--accent-red);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--text-primary);
+        }
+
+        /* Footer */
+        footer {
+            padding: 2rem 4rem;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .footer-text {
+            font-size: 0.75rem;
+            color: var(--text-muted);
         }
 
         /* Animations */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(20px);
             }
             to {
                 opacity: 1;
@@ -566,366 +462,297 @@
             }
         }
 
-        /* Scrollbar Styling */
-        ::-webkit-scrollbar {
-            width: 6px;
+        /* Fade in on scroll */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
         }
 
-        ::-webkit-scrollbar-track {
-            background: var(--background-primary);
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
-        ::-webkit-scrollbar-thumb {
-            background: var(--cblue-400);
-            border-radius: 3px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--cblue-500);
-        }
-
-        /* Responsive Design */
+        /* Mobile Responsiveness */
         @media (max-width: 768px) {
-            :root {
-                --container-padding: 1rem;
-                --section-padding: 3rem 0;
+            nav {
+                padding: 1.5rem 2rem;
             }
-            
-            .hero-title {
-                font-size: 2.5rem;
+
+            .hero {
+                padding: 8rem 2rem 2rem;
             }
-            
-            .section-title {
-                font-size: 2rem;
+
+            .section {
+                padding: 3rem 2rem;
             }
-            
-            .features-grid {
+
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .responsibilities {
                 grid-template-columns: 1fr;
             }
-            
-            .action-buttons {
+
+            .methods-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .work-item {
+                grid-template-columns: 1fr;
+            }
+
+            .cta {
+                padding: 4rem 2rem;
+            }
+
+            .cta-buttons {
                 flex-direction: column;
-            }
-            
-            .btn {
-                width: 100%;
-                justify-content: center;
-            }
-
-            .featured-work {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (min-width: 1024px) {
-            .hero-title {
-                font-size: 4rem;
-            }
-
-            .featured-work {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        /* Focus states for accessibility */
-        .btn:focus,
-        .back-button:focus {
-            outline: 2px solid var(--cblue-400);
-            outline-offset: 2px;
-        }
-
-        /* Reduced motion preferences */
-        @media (prefers-reduced-motion: reduce) {
-            *,
-            *::before,
-            *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
             }
         }
     </style>
 </head>
-
 <body>
-    <!-- Header -->
-    <header class="header">
-        <div class="container">
-            <a href="index.html" class="logo">
-                <i class="fas fa-arrow-left"></i>
-                <span>Back to Portfolio</span>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="back-link">
+                ← Back to Portfolio
             </a>
-            
-            <a href="https://www.youtube.com/@leon.hartono" target="_blank" rel="noopener noreferrer" class="back-button">
-                <i class="fab fa-youtube"></i>
+            <a href="https://www.youtube.com/@leon.hartono" target="_blank" class="youtube-link">
                 Visit Channel
             </a>
         </div>
-    </header>
+    </nav>
 
-    <main>
-        <!-- Hero Section -->
-        <section class="hero">
-            <div class="container">
-                <div class="hero-content">
-                    <h1 class="hero-title gradient-text">
-                        The Overpost Research
-                    </h1>
-                    <p class="hero-subtitle">
-                        Financial market analysis and content strategy for Indonesia's leading financial education YouTube channel with 600K+ subscribers, focusing on elevating financial literacy through data-driven research and strategic content creation.
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <p class="project-label">Financial Education Platform</p>
+            <h1 class="project-title">The Overpost Research</h1>
+            <p class="project-description">
+                Financial market analysis and content strategy for Indonesia's leading financial education YouTube channel with 600K+ subscribers. Conducting comprehensive research and developing content strategies that make complex financial concepts accessible to the Indonesian market.
+            </p>
+            <div class="project-meta">
+                <div class="meta-item">
+                    <span class="meta-label">Role</span>
+                    <span class="meta-value">Researcher & Scriptwriter</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Audience</span>
+                    <span class="meta-value">600K+ Subscribers</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Focus</span>
+                    <span class="meta-value">Financial Literacy</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Period</span>
+                    <span class="meta-value">2023 - Present</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Role Overview -->
+    <section class="section">
+        <h2 class="section-title">Role Overview</h2>
+        <div class="content-grid fade-in">
+            <div>
+                <p class="content-label">Responsibility</p>
+            </div>
+            <div class="content-text">
+                <p>
+                    As a Researcher and Scriptwriter at The Overpost, I conduct comprehensive financial market analysis and develop content strategies for video production. My role encompasses both quantitative and qualitative research approaches, ensuring accurate and accessible financial information for Indonesia's growing audience seeking financial literacy.
+                </p>
+                <p>
+                    Beyond research, I contribute to content strategizing, channel management, and the overall mission of making complex financial topics understandable for the Indonesian market. This involves analyzing market trends, evaluating investment opportunities, and translating technical concepts into engaging educational content.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Responsibilities -->
+    <section class="section">
+        <h2 class="section-title">Key Responsibilities</h2>
+        <div class="responsibilities fade-in">
+            <div class="responsibility">
+                <p class="responsibility-number">01</p>
+                <h3 class="responsibility-title">Market Research</h3>
+                <p class="responsibility-description">
+                    Comprehensive analysis of financial markets including cryptocurrency, stocks, commodities, and business trends with data from multiple sources.
+                </p>
+            </div>
+            <div class="responsibility">
+                <p class="responsibility-number">02</p>
+                <h3 class="responsibility-title">Content Strategy</h3>
+                <p class="responsibility-description">
+                    Developing engaging scripts that translate complex financial concepts into accessible content aligned with channel goals and audience needs.
+                </p>
+            </div>
+            <div class="responsibility">
+                <p class="responsibility-number">03</p>
+                <h3 class="responsibility-title">Channel Management</h3>
+                <p class="responsibility-description">
+                    Contributing to overall channel strategy, content planning, and optimization efforts to maintain leadership in financial education.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Research Approaches -->
+    <section class="section">
+        <h2 class="section-title">Research Approaches</h2>
+        <div class="methods-grid fade-in">
+            <div class="method-card">
+                <h3 class="method-title">Quantitative Research</h3>
+                <p class="method-description">
+                    Data-driven analysis using statistical methods, market indicators, and financial metrics for topics requiring numerical precision and measurable insights.
+                </p>
+                <div class="method-examples">
+                    <span class="example-tag">US Stocks</span>
+                    <span class="example-tag">Gold Markets</span>
+                    <span class="example-tag">Market Performance</span>
+                    <span class="example-tag">Price Analysis</span>
+                </div>
+            </div>
+            <div class="method-card">
+                <h3 class="method-title">Qualitative Research</h3>
+                <p class="method-description">
+                    In-depth analysis of market sentiment, business strategies, and industry dynamics for comprehensive understanding of complex financial topics.
+                </p>
+                <div class="method-examples">
+                    <span class="example-tag">Bitcoin Ecosystem</span>
+                    <span class="example-tag">Business Analysis</span>
+                    <span class="example-tag">Industry Insights</span>
+                    <span class="example-tag">Market Sentiment</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Work -->
+    <section class="section">
+        <h2 class="section-title">Featured Research Work</h2>
+        <div class="work-grid fade-in">
+            <div class="work-item">
+                <div class="work-meta">
+                    <p class="work-type">Qualitative Research</p>
+                    <h3 class="work-title">Bitcoin Market Analysis</h3>
+                    <a href="https://youtu.be/SvGQEe61NI0?feature=shared" target="_blank" class="work-link">
+                        Watch Video →
+                    </a>
+                </div>
+                <div class="work-description">
+                    <p>
+                        Comprehensive analysis of Bitcoin's market dynamics, ecosystem developments, and impact on the broader cryptocurrency landscape. This research combines market sentiment analysis with fundamental evaluation of Bitcoin's long-term prospects.
                     </p>
-                    
-                    <div class="hero-badges">
-                        <span class="badge"><i class="fas fa-chart-line"></i> Financial Research</span>
-                        <span class="badge"><i class="fas fa-pen-nib"></i> Content Strategy</span>
-                        <span class="badge"><i class="fas fa-youtube"></i> 600K+ Subscribers</span>
-                        <span class="badge"><i class="fas fa-globe-asia"></i> Indonesia Focus</span>
-                    </div>
-                    
-                    <div class="action-buttons">
-                        <a href="https://www.youtube.com/@leon.hartono" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-                            <i class="fab fa-youtube"></i>
-                            Visit The Overpost
-                        </a>
-                        <a href="#featured-work" class="btn btn-secondary">
-                            <i class="fas fa-video"></i>
-                            View My Work
-                        </a>
-                    </div>
                 </div>
             </div>
-        </section>
 
-        <!-- Overview Section -->
-        <section class="content-section">
-            <div class="container">
-                <h2 class="section-title gradient-text">Role Overview</h2>
-                <div style="max-width: 800px; margin: 0 auto; text-align: center;">
-                    <p style="font-size: 1.125rem; color: var(--text-secondary); line-height: 1.8; margin-bottom: 2rem;">
-                        As a Researcher and Scriptwriter at The Overpost, I conduct comprehensive financial market analysis and develop content strategies for video production. My role encompasses both quantitative and qualitative research approaches, ensuring accurate and accessible financial information for Indonesia's growing audience seeking financial literacy.
-                    </p>
-                    <p style="font-size: 1.125rem; color: var(--text-secondary); line-height: 1.8;">
-                        Beyond research, I contribute to content strategizing, channel management, and the overall mission of making complex financial topics understandable for the Indonesian market.
+            <div class="work-item">
+                <div class="work-meta">
+                    <p class="work-type">Quantitative Research</p>
+                    <h3 class="work-title">Bitcoin Investment Strategy</h3>
+                    <a href="https://youtu.be/PbdAgUYafR8?feature=shared" target="_blank" class="work-link">
+                        Watch Video →
+                    </a>
+                </div>
+                <div class="work-description">
+                    <p>
+                        Strategic analysis of Bitcoin investment approaches, risk assessment, and portfolio considerations for investors. Covers both technical and fundamental aspects of Bitcoin investment strategies.
                     </p>
                 </div>
             </div>
-        </section>
 
-        <!-- Key Responsibilities Section -->
-        <section class="content-section">
-            <div class="container">
-                <h2 class="section-title gradient-text">Key Responsibilities</h2>
-                <div class="features-grid">
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-search"></i>
-                        </div>
-                        <h3 class="feature-title">Financial Market Research</h3>
-                        <p class="feature-description">
-                            Conduct comprehensive analysis of financial markets including cryptocurrency, stocks, commodities, and business trends. Gather data from multiple sources to create accurate, up-to-date content for educational videos.
-                        </p>
-                    </div>
-                    
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-pen-fancy"></i>
-                        </div>
-                        <h3 class="feature-title">Content Strategy & Scriptwriting</h3>
-                        <p class="feature-description">
-                            Develop engaging scripts that translate complex financial concepts into accessible content for diverse audiences. Create content strategies that align with channel goals and audience needs.
-                        </p>
-                    </div>
-                    
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-cogs"></i>
-                        </div>
-                        <h3 class="feature-title">Channel Management</h3>
-                        <p class="feature-description">
-                            Contribute to overall channel strategy, content planning, and optimization efforts to maintain The Overpost's position as Indonesia's leading financial education platform.
-                        </p>
-                    </div>
+            <div class="work-item">
+                <div class="work-meta">
+                    <p class="work-type">Qualitative Research</p>
+                    <h3 class="work-title">Danantara Analysis</h3>
+                    <a href="https://youtu.be/moZ_O2r0g6o?feature=shared" target="_blank" class="work-link">
+                        Watch Video →
+                    </a>
+                </div>
+                <div class="work-description">
+                    <p>
+                        An analysis of Danantara, breaking down the risks, potential, and the playbooks that it uses using data and case comparisons to provide comprehensive insights for investors.
+                    </p>
                 </div>
             </div>
-        </section>
 
-        <!-- Research Types Section -->
-        <section class="content-section">
-            <div class="container">
-                <h2 class="section-title gradient-text">Research Approaches</h2>
-                <div class="research-types">
-                    <div class="research-type">
-                        <div class="research-type-icon quantitative">
-                            <i class="fas fa-chart-bar"></i>
-                        </div>
-                        <h3 class="research-type-title">Quantitative Research</h3>
-                        <p style="color: var(--text-secondary); margin-bottom: 1rem;">
-                            Data-driven analysis using statistical methods, market indicators, and financial metrics for topics requiring numerical precision.
-                        </p>
-                        <div class="research-examples">
-                            <span class="research-example">US Stocks Analysis</span>
-                            <span class="research-example">Gold Market Trends</span>
-                            <span class="research-example">Market Performance</span>
-                        </div>
-                    </div>
-                    
-                    <div class="research-type">
-                        <div class="research-type-icon qualitative">
-                            <i class="fas fa-comments"></i>
-                        </div>
-                        <h3 class="research-type-title">Qualitative Research</h3>
-                        <p style="color: var(--text-secondary); margin-bottom: 1rem;">
-                            In-depth analysis of market sentiment, business strategies, and industry dynamics for comprehensive understanding of complex topics.
-                        </p>
-                        <div class="research-examples">
-                            <span class="research-example">Bitcoin Ecosystem</span>
-                            <span class="research-example">Business Analysis</span>
-                            <span class="research-example">Industry Insights</span>
-                        </div>
-                    </div>
+            <div class="work-item">
+                <div class="work-meta">
+                    <p class="work-type">Quantitative Research</p>
+                    <h3 class="work-title">US Stock Market Analysis</h3>
+                    <a href="https://youtu.be/1HW6ggDfFq4?feature=shared" target="_blank" class="work-link">
+                        Watch Video →
+                    </a>
+                </div>
+                <div class="work-description">
+                    <p>
+                        Data-driven analysis of US Stocks platforms and practical use cases. This research includes market trends, user demographics, and platform features to provide insights for investors and users.
+                    </p>
                 </div>
             </div>
-        </section>
 
-        <!-- Featured Work Section -->
-        <section id="featured-work" class="content-section">
-            <div class="container">
-                <h2 class="section-title gradient-text">Featured Research Work</h2>
-                <div class="featured-work">
-                    <div class="work-item">
-                        <div class="work-item-header">
-                            <div class="work-item-icon">
-                                <i class="fab fa-bitcoin"></i>
-                            </div>
-                            <h3 class="work-item-title">Bitcoin Market Analysis</h3>
-                            <span class="work-item-type">Qualitative Research</span>
-                        </div>
-                        <p class="work-item-description">
-                            Comprehensive analysis of Bitcoin's market dynamics, ecosystem developments, and impact on the broader cryptocurrency landscape. This research combines market sentiment analysis with fundamental evaluation of Bitcoin's long-term prospects.
-                        </p>
-                        <a href="https://youtu.be/SvGQEe61NI0?feature=shared" target="_blank" rel="noopener noreferrer" class="work-item-link">
-                            Watch Video <i class="fas fa-external-link-alt"></i>
-                        </a>
-                    </div>
-
-                    <div class="work-item">
-                        <div class="work-item-header">
-                            <div class="work-item-icon">
-                                <i class="fab fa-bitcoin"></i>
-                            </div>
-                            <h3 class="work-item-title">Bitcoin Investment Strategy</h3>
-                            <span class="work-item-type">Quantitative Research</span>
-                        </div>
-                        <p class="work-item-description">
-                            Strategic analysis of Bitcoin investment approaches, risk assessment, and portfolio considerations for investors. Covers both technical and fundamental aspects of Bitcoin investment strategies.
-                        </p>
-                        <a href="https://youtu.be/PbdAgUYafR8?feature=shared" target="_blank" rel="noopener noreferrer" class="work-item-link">
-                            Watch Video <i class="fas fa-external-link-alt"></i>
-                        </a>
-                    </div>
-
-                    <div class="work-item">
-                        <div class="work-item-header">
-                            <div class="work-item-icon">
-                                <i class="fas fa-building"></i>
-                            </div>
-                            <h3 class="work-item-title">Danantara Analysis</h3>
-                            <span class="work-item-type">Qualitative Research</span>
-                        </div>
-                        <p class="work-item-description">
-                            An analysis of Danantara, breaking down the risks, potential, and the playbooks that it uses using data and case comparisons.
-                        </p>
-                        <a href="https://youtu.be/moZ_O2r0g6o?feature=shared" target="_blank" rel="noopener noreferrer" class="work-item-link">
-                            Watch Video <i class="fas fa-external-link-alt"></i>
-                        </a>
-                    </div>
-
-                    <div class="work-item">
-                        <div class="work-item-header">
-                            <div class="work-item-icon">
-                                <i class="fas fa-chart-line"></i>
-                            </div>
-                            <h3 class="work-item-title">US Stock Market Analysis</h3>
-                            <span class="work-item-type">Quantitative Research</span>
-                        </div>
-                        <p class="work-item-description">
-                            Data-driven analysis of US Stocks platforms and practical use cases. This research includes market trends, user demographics, and platform features to provide insights for investors and users.
-                        </p>
-                        <a href="https://youtu.be/1HW6ggDfFq4?feature=shared" target="_blank" rel="noopener noreferrer" class="work-item-link">
-                            Watch Video <i class="fas fa-external-link-alt"></i>
-                        </a>
-                    </div>
-
-                    <div class="work-item">
-                        <div class="work-item-header">
-                            <div class="work-item-icon">
-                                <i class="fas fa-coins"></i>
-                            </div>
-                            <h3 class="work-item-title">Gold Investment Analysis</h3>
-                            <span class="work-item-type">Quantitative Research</span>
-                        </div>
-                        <p class="work-item-description">
-                            Quantitative analysis of gold as an investment vehicle, examining price trends, market correlations, and gold investment strategies.
-                        </p>
-                        <a href="https://youtu.be/3XhJ025TKrQ?feature=shared" target="_blank" rel="noopener noreferrer" class="work-item-link">
-                            Watch Video <i class="fas fa-external-link-alt"></i>
-                        </a>
-                    </div>
+            <div class="work-item">
+                <div class="work-meta">
+                    <p class="work-type">Quantitative Research</p>
+                    <h3 class="work-title">Gold Investment Analysis</h3>
+                    <a href="https://youtu.be/3XhJ025TKrQ?feature=shared" target="_blank" class="work-link">
+                        Watch Video →
+                    </a>
+                </div>
+                <div class="work-description">
+                    <p>
+                        Quantitative analysis of gold as an investment vehicle, examining price trends, market correlations, and gold investment strategies for portfolio diversification.
+                    </p>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <h2 class="cta-title">Explore The Overpost</h2>
+        <p class="cta-description">
+            Join 600K+ subscribers learning about financial markets, investment strategies, and economic insights through data-driven research and analysis.
+        </p>
+        <div class="cta-buttons">
+            <a href="https://www.youtube.com/@leon.hartono" target="_blank" class="btn btn-primary">
+                Visit YouTube Channel →
+            </a>
+            <a href="index.html#projects" class="btn btn-secondary">
+                Back to Projects
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p class="footer-text">© 2025 Alvin. All rights reserved.</p>
+    </footer>
 
     <script>
-        // Scroll animations
-        document.addEventListener('DOMContentLoaded', function() {
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            };
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
 
-            const observer = new IntersectionObserver(function(entries) {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                    }
-                });
-            }, observerOptions);
-
-            // Observe all animated elements
-            const animatedElements = document.querySelectorAll('.feature-card, .research-type, .work-item, .stat-card');
-            animatedElements.forEach((el, index) => {
-                el.style.opacity = '0';
-                el.style.transform = 'translateY(30px)';
-                el.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
-                observer.observe(el);
-            });
-
-            // Header scroll effect
-            const header = document.querySelector('.header');
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 100) {
-                    header.style.backgroundColor = 'rgba(0, 0, 0, 0.95)';
-                } else {
-                    header.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
                 }
             });
+        }, observerOptions);
 
-            // Smooth scrolling for anchor links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
-                });
-            });
-
-            console.log('The Overpost research page loaded! 📊');
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
         });
     </script>
 </body>

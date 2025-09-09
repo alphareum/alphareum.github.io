@@ -295,19 +295,13 @@
 
         /* Projects Section - Horizontal Scroll */
         .projects {
-            padding: 8rem 0;
             background: var(--bg-secondary);
-        }
-
-        .projects-header {
-            padding: 0 4rem;
-            margin-bottom: 4rem;
         }
 
         .projects-scroll {
             overflow-x: auto;
             overflow-y: hidden;
-            padding: 0 4rem 2rem;
+            padding-bottom: 2rem;
         }
 
         .projects-track {
@@ -519,14 +513,6 @@
                 padding: 4rem 2rem;
             }
 
-            .projects-header {
-                padding: 0 2rem;
-            }
-
-            .projects-scroll {
-                padding: 0 2rem 2rem;
-            }
-
             .project-card {
                 flex: 0 0 300px;
             }
@@ -669,13 +655,14 @@
     </section>
 
     <!-- Projects Section -->
-    <section id="projects" class="projects">
-        <div class="projects-header">
-            <p class="section-label">Portfolio</p>
-            <h2 class="section-title">Selected Projects</h2>
-        </div>
-        <div class="projects-scroll">
-            <div class="projects-track">
+    <section id="projects" class="projects section">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label">Portfolio</p>
+                <h2 class="section-title">Selected Projects</h2>
+            </div>
+            <div class="projects-scroll">
+                <div class="projects-track">
                 <!-- The Overpost Research -->
                 <div class="project-card fade-in">
                     <p class="project-type">Research</p>
@@ -727,6 +714,9 @@
                     </a>
                 </div>
 
+                </div>
+            </div>
+        </div>
     </section>
 
     <!-- Experience Section -->

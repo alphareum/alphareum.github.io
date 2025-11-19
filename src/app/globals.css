@@ -316,6 +316,7 @@ nav.scrolled {
   padding: 2rem;
   transition: var(--transition);
   cursor: pointer;
+  text-decoration: none;
 }
 
 .project-card:hover {

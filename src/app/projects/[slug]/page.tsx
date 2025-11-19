@@ -68,7 +68,7 @@ export default async function ProjectPage({ params }: Props) {
             </div>
             {project.link && (
               <a href={project.link} target="_blank" rel="noopener noreferrer" className="external-link">
-                Visit Website →
+                Visit Channel →
               </a>
             )}
           </div>

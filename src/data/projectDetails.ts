@@ -35,7 +35,7 @@ export const projectDetails: { [key: string]: ProjectDetail } = {
       client: 'The Overpost YouTube Channel',
       field: 'Financial Literacy',
     },
-    link: 'https://www.youtube.com/@theoverpost',
+    link: 'https://www.youtube.com/@leon.hartono',
     overview: {
       title: 'Role Overview',
       content: [

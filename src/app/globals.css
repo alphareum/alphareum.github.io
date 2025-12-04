@@ -756,38 +756,42 @@ footer {
 
 @media (max-width: 768px) {
   .nav-links {
-    display: none;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: var(--bg-primary);
+    background: rgba(9, 9, 11, 0.85);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.05);
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 2rem;
+    gap: 2.5rem;
     z-index: 999;
     opacity: 0;
+    visibility: hidden;
     pointer-events: none;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                visibility 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .nav-links.open {
-    display: flex;
     opacity: 1;
+    visibility: visible;
     pointer-events: all;
   }
 
   .nav-links li {
     opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.3s ease;
+    transform: scale(0.9) translateY(20px);
+    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 
   .nav-links.open li {
     opacity: 1;
-    transform: translateY(0);
+    transform: scale(1) translateY(0);
   }
 
   .nav-links.open li:nth-child(1) {
@@ -795,19 +799,40 @@ footer {
   }
 
   .nav-links.open li:nth-child(2) {
-    transition-delay: 0.2s;
+    transition-delay: 0.15s;
   }
 
   .nav-links.open li:nth-child(3) {
-    transition-delay: 0.3s;
+    transition-delay: 0.2s;
   }
 
   .nav-links.open li:nth-child(4) {
-    transition-delay: 0.4s;
+    transition-delay: 0.25s;
   }
 
   .nav-link {
-    font-size: 1.5rem;
+    font-size: 2rem;
+    font-weight: 300;
+    letter-spacing: 0.02em;
+    padding: 0.5rem 1.5rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    background: transparent;
+  }
+
+  .nav-link:hover {
+    background: rgba(136, 180, 245, 0.1);
+    color: var(--accent);
+    transform: translateX(10px);
+  }
+
+  .nav-link.active {
+    background: rgba(136, 180, 245, 0.15);
+    color: var(--accent);
+  }
+
+  .nav-link.active::after {
+    display: none;
   }
 
   .menu-toggle {

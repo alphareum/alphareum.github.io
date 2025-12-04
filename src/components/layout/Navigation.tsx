@@ -42,7 +42,7 @@ export default function Navigation() {
         <Link href="/" className="logo">
           Alvin
         </Link>
-        <ul className="nav-links">
+        <ul className={`nav-links ${mobileMenuOpen ? 'open' : ''}`}>
           <li>
             <a
               href="#about"
@@ -82,12 +82,18 @@ export default function Navigation() {
         </ul>
         <button
           className="menu-toggle"
-          aria-label="Menu"
+          aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
         >
-          <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M3 12h18M3 6h18M3 18h18" />
-          </svg>
+          {mobileMenuOpen ? (
+            <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M18 6L6 18M6 6l12 12" />
+            </svg>
+          ) : (
+            <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M3 12h18M3 6h18M3 18h18" />
+            </svg>
+          )}
         </button>
       </div>
     </nav>
